@@ -1,0 +1,40 @@
+@font-face{
+    font-family: googleFont;
+    src: url("../../assets/fonts/Anton/Anton-Regular.ttf");
+}
+
+
+
+header.headerbasic{
+    background-color: rgb(0, 0, 0);
+    height: 100px;
+    width: 100%;
+    display: flex;
+    border-bottom: 2px solid rgb(74, 65, 200);
+    align-items: center;
+    justify-content: space-between;
+   
+    
+
+
+
+}
+
+div.brandName{
+    color: rgb(255, 255, 255);
+    font-size: 40px;
+    font-family: googleFont;
+    padding: 0px 30px;
+    
+    
+
+}
+
+
+svg.svgheader{
+    width: 100px;
+    padding: 0px 30px;
+
+
+}
+

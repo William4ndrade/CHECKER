@@ -1,0 +1,12 @@
+input.mybitches{
+    width: 90%;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    outline: none;
+    color: slateblue;
+    height: 40px;
+    font-size: 25px;
+    border-bottom: 1px solid rgb(91, 98, 194);
+    text-align: center;
+    padding: 25px 0px;
+}

@@ -1,0 +1,15 @@
+button.buttoncorno{
+    margin: 30px;
+    background-color: rgba(105, 90, 205, 0.52);
+    border: 1px solid rgb(0, 0, 0);
+    width: 230px;
+    height: 60px;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    outline: none;
+}
+
+button.buttoncorno:hover{
+    background-color: rgba(105, 90, 205, 0.301);
+}

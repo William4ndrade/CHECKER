@@ -1,0 +1,67 @@
+@font-face{
+  font-family: textfont;
+  src: url("./assets/fonts/Open_Sans_Condensed/OpenSansCondensed-Bold.ttf");
+}
+
+
+div.container{
+  /* border: 1px solid red; */
+  min-height: 500px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+
+div.formAREA{
+    height: 500px;
+    width: 600px;
+    background-color: black;
+    margin: 0px 40px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+@media(max-width: 500px){
+
+  div.formAREA{
+    width: 100%;
+    margin: 0;
+ 
+  }
+
+
+
+}
+
+h1.form{
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-family: textfont;
+
+
+}
+
+
+.inputinformarea{
+  padding: 300px 0px;
+}
+
+
+div.loginclaimer{
+  color: rgba(255, 255, 255, 0.479);
+  font-family: textfont;
+  font-size: 18px;
+  cursor: pointer;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
+
+div.loginclaimer:hover{
+  color: rgba(255, 255, 255, 0.911);
+}

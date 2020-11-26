@@ -1,0 +1,47 @@
+@font-face{
+    font-family: textfont;
+    src: url("../../assets/fonts/Open_Sans_Condensed/OpenSansCondensed-Bold.ttf");
+}
+
+div.textContainer{
+    max-width: 460px;
+    min-height: 450px;
+    color: rgb(86, 84, 199);
+    padding: 20px;
+    margin: 0px 20px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+ 
+}
+
+span.textSpan{
+    font-size: 25px;
+    font-family: textfont;
+}
+
+svg.svgtext{
+    max-width: 400px;
+    max-height: 320px;
+    position: relative;
+    bottom: 20px; 
+}
+
+
+@media(max-width: 500px){
+
+    svg.svgtext{
+        max-width: 300px;
+        max-height: 220px;
+        position: relative;
+        bottom: 20px; 
+
+
+    }
+
+
+}
+
+p.pdepato{
+    color: white;
+}
