@@ -53,15 +53,16 @@ h1.form{
 }
 
 
-div.loginclaimer{
+a.loginclaimer{
   color: rgba(255, 255, 255, 0.479);
   font-family: textfont;
   font-size: 18px;
   cursor: pointer;
   -moz-user-select: none;
   -webkit-user-select: none;
+  text-decoration: none;
 }
 
-div.loginclaimer:hover{
+a.loginclaimer:hover{
   color: rgba(255, 255, 255, 0.911);
 }

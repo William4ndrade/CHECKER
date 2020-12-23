@@ -20,11 +20,13 @@ header.headerbasic{
 
 }
 
-div.brandName{
+.brandName{
     color: rgb(255, 255, 255);
     font-size: 40px;
     font-family: googleFont;
     padding: 0px 30px;
+    cursor: pointer;
+    text-decoration: none;
     
     
 
