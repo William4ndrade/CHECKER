@@ -40,7 +40,6 @@ export default class myapp extends Component {
           < TextComponent />
           <Routes />
         </div>
-
       </div>
       </BrowserRouter>
 

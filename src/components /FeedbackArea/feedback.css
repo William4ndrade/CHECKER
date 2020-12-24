@@ -1,0 +1,19 @@
+
+
+
+div#feedback {
+    width: 100%;
+    color: white;
+    position: relative;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+div.feedbackred{
+    background-color: rgb(175, 42, 42);
+}
+
+div.feedbackgreen{
+    background-color:  rgb(43, 126, 43);
+}
