@@ -14,8 +14,8 @@ export default props => {
 
     return(
     <Switch> 
-        <Route exact path="/" > <Register />  </Route>
-        <Route exact path="/Login" > <Login />  </Route>
+        <Route exact path="/" > <Login />  </Route>
+        <Route exact path="/Register" > <Register />  </Route>
         <Redirect from="*" to="/" />
     </Switch>
     )
