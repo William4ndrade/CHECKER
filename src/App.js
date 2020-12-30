@@ -18,21 +18,23 @@ export default class myapp extends Component {
 
   }
 
-  turnLoggout(){
-       IsAuth().then(e => {
-         console.log(e)
+  CheckAuth(){
+      IsAuth().then(e => {
+          this.setState({
+            auth: e
+          }) 
       })
-     
       
   }
 
+  
 
   
 
 
   render() {
-    this.turnLoggout()
-    
+     
+   
       if(this.state.auth){
         return (
           <BrowserRouter>
@@ -42,9 +44,6 @@ export default class myapp extends Component {
 
 
         )
-
-
-
 
 
 
