@@ -1,0 +1,29 @@
+div.selectcontent{
+    max-width:  100%;
+    height: 50px;
+    background-color: rgb(3, 1, 10);
+    padding: 10px;
+    display: flex;
+    font-family: googlefont;
+    align-items: center;
+    justify-content: space-around;
+    border-bottom: 2px solid rgb(74, 65, 200);
+}
+
+.linkselectcontent{
+    color: rgb(255, 255, 255);
+    text-decoration: none;   
+    font-weight: 100;
+}
+
+.linkselectcontent:hover{
+    color: grey;
+    border-bottom: 1px solid rgb(89, 29, 253);
+}
+
+
+i{
+    color: rgb(80, 83, 241);
+    font-size: 20px;
+    margin: 0px;
+}

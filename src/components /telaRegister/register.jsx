@@ -1,9 +1,14 @@
-import React, { Component } from "react"
+import React, { Component} from "react"
 import { Link } from "react-router-dom"
 import Feedback from "../FeedbackArea/feedback"
 import config from "../../Config.json"
 import "../formularioComponent/INPUTS/input"
 import "../formularioComponent/buttons/buttons"
+import  Context  from "../../providers/basedataProvider"
+
+
+
+
 
 export default class Register extends Component {
 
@@ -43,6 +48,14 @@ export default class Register extends Component {
         setTimeout(() => this.setState({
             feedback: []
         }), 2000)
+    }
+
+    BeAuthenticaded(username){
+        const { set } = this.context
+        set({
+          authenticaded: true,
+          username,
+        })
     }
 
 
@@ -92,11 +105,7 @@ export default class Register extends Component {
             .then(e => {
                 if(e.ok === true){
                     this.changeFeedback("Conta criada com sucesso", "feedbackgreen")
-                    
-
-
-
-
+                    this.BeAuthenticaded(e.username)
 
                 }else{
                     if(e.statusmensage === "Email aready exists"){
@@ -122,7 +131,8 @@ export default class Register extends Component {
     }
 
 
-    render() {      
+    render() {    
+        console.log(this.props)
             return (
                 <div className="formAREA">
                      <Feedback value={this.state.feedback.length > 0 ? this.state.feedback[0].text : ""} classes={this.state.feedback.length > 0 ? this.state.feedback[0].classes : ""}  /> 
@@ -132,10 +142,12 @@ export default class Register extends Component {
                     <input name="Senha" value={this.state.Users.Senha} onChange={e => this.changeField(e)} className="mybitches" placeholder="Senha" type="password" ></input>
                     <input name="confirmarsenha" value={this.state.Users.confirmarsenha} onChange={e => this.changeField(e)} className="mybitches" placeholder="Confirmar senha" type="password" ></input>
                     <button onClick={e => this.APIPostFunction()} className="buttoncorno" > Registra-se </button>
-                    <Link className="loginclaimer" to="/">Já é de casa? Clique aqui e faça login</Link>
-
+                    <Link onClick={e => this.props.path("/")} className="loginclaimer" >Já é de casa? Clique aqui e faça login</Link>
                 </div>
             )
         } 
 
 }
+
+
+Register.contextType = Context

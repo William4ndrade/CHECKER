@@ -1,39 +1,35 @@
-import React from "react"
-import {Switch, Redirect, Route } from "react-router"
-import IsAuth from "./Auth/IsAuthenticaded"
+import React ,{ useContext} from "react"
+import {Switch, Redirect, Route, BrowserRouter } from "react-router-dom"
+import  Context from "../providers/basedataProvider"
+
 // components 
 
-import Login from "./telalogin/login"
-import Register from "./telaRegister/register"
+import TelaNãoAutenticado from "./Telas/naoautenticado"
+import TelaAutenticado from "./Telas/autenticado"
 
 
 //--------------------------------------------
 
 
-const PriviteRoute = (Component) => (
+const Routes =  props => {
+    
+    const Getdata = () => {
+        const {data} = useContext(Context)
+        return data.authenticaded
+    }
 
-    <Route exact path="/me" render={async e => {
-        await IsAuth() ? < Component /> : <Redirect to="/" />
-    }} />  
-
-
-)
-
-
-
-const routes =  props => {
-
-
-
+   
+   
     return(
-    <Switch> 
-        <Route exact path="/" > <Login />  </Route>
-        <Route exact path="/Register" > <Register />  </Route>
-        <PriviteRoute Component={<h1>OI</h1>} />
-        <Redirect from="*" to="/" />
-    </Switch>
+        
+        <BrowserRouter>
+            <Switch>
+                 <Route path="/" exact > { Getdata() ? <TelaAutenticado /> : <TelaNãoAutenticado /> }           </Route> 
+            </Switch>
+        </BrowserRouter>
+      
     )
 
 }
 
-export default routes
+export default Routes

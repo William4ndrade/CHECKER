@@ -2,8 +2,12 @@ import React, { Component } from "react"
 import { Link } from "react-router-dom"
 import Feedback from "../FeedbackArea/feedback"
 import config from "../../Config.json"
+import  Context  from "../../providers/basedataProvider"
 
-export default class Register extends Component {
+
+
+
+export default class Login extends Component {
 
   constructor(props) {
     super(props)
@@ -21,6 +25,14 @@ export default class Register extends Component {
     const user = { ...this.state }
     user.Users[event.target.name] = event.target.value
     this.setState(user)
+  }
+
+  BeAuthenticaded(username){
+      const { set } = this.context
+      set({
+        authenticaded: true,
+        username,
+      })
   }
 
   changeFeedback(text, classes) {
@@ -68,7 +80,8 @@ export default class Register extends Component {
         })
           .then(e => {
               if(e.status === 202){
-                  this.changeFeedback("Login executado com sucesso", "feedbackgreen")
+                  this.changeFeedback("Login executado com sucesso", "feedbackgreen")      
+                   this.BeAuthenticaded(e.json.username)
               }else{
                 if(e.status === 401){
                   this.changeFeedback(e.json.statusmensage, "feedbackred")
@@ -116,7 +129,7 @@ export default class Register extends Component {
               <input name="Email" value={this.state.Users.Email} onChange={e => this.changeField(e)} className="mybitches" placeholder="Email" type="Email" ></input>
               <input name="Senha" value={this.state.Users.Senha} onChange={e => this.changeField(e)} className="mybitches" placeholder="Senha" type="password" ></input>
               <button onClick={e => this.APILoginRoute()} className="buttoncorno" > Login </button>
-              <Link className="loginclaimer" to="Register">Faça seu registro por aqui.</Link>
+              <Link onClick={e => this.props.path("/register")}  to="/" className="loginclaimer" >Faça seu registro por aqui.</Link>
             </div>
           )
     
@@ -142,8 +155,6 @@ export default class Register extends Component {
 
 
 
-
-
-
-
 }
+
+Login.contextType = Context

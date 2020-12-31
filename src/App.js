@@ -1,83 +1,47 @@
-import React, { Component } from "react"
+import React, { useEffect, useState } from "react"
 import './App.css';
-import Header from "./components /headerComponent/hearder"
-import TextComponent from "./components /textComponent/textComponent"
-import Routes from "./components /Router"
-import {BrowserRouter} from "react-router-dom"
-import IsAuth from "./components /Auth/IsAuthenticaded"
-
-export default class myapp extends Component {
+import Routes from "./components /Router.jsx"
+import DataProvider from "./providers/basedataProvider"
+import Auth from "./components /Auth/IsAuthenticaded"
 
 
-  constructor(props) {
-    super(props)
-    this.state = {
-       auth: false
-     
+const Myapp = () => {
+
+  const [Dataproviders, setDataprovider] = useState({
+    authenticaded: false,
+    username: null,
+
+  })
+
+
+  const readCookie = async () => {
+    const auth = await Auth()
+    if (auth.ok) {
+      setDataprovider({
+        authenticaded: true,
+        username: auth.username
+      })
+
+    } else {
+      setDataprovider({
+        authenticaded: false
+      })
     }
 
   }
 
-  CheckAuth(){
-      IsAuth().then(e => {
-          this.setState({
-            auth: e
-          }) 
-      })
-      
-  }
+  useEffect(() => {
+    const ass = async () => await readCookie()
+    ass()
+  }, [])
 
-  
-
-  
-
-
-  render() {
-     
-   
-      if(this.state.auth){
-        return (
-          <BrowserRouter>
-          < Header />
-          
-          </BrowserRouter>
-
-
-        )
-
-
-
-      }else{
-        return (
-          <BrowserRouter>
-          <div>
-            < Header />
-            <div className="container" >
-              < TextComponent />
-              <Routes />
-            </div>
-          </div>
-          </BrowserRouter>
-    
-        )
-
-
-
-
-
-
-
-      }
-    
-
-
-
-
-
-    
-
-  }
+  return (
+    <DataProvider.Provider value={{data: Dataproviders, set: setDataprovider}}>
+      < Routes />
+    </DataProvider.Provider>
+  )
 
 }
 
 
+export default Myapp

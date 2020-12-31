@@ -10,7 +10,7 @@ header.headerbasic{
     height: 100px;
     width: 100%;
     display: flex;
-    border-bottom: 2px solid rgb(74, 65, 200);
+    border-bottom: 1px solid rgb(74, 65, 200);
     align-items: center;
     justify-content: space-between;
    
@@ -47,3 +47,19 @@ svg.svgheader{
 
 }
 
+
+h3.username{
+    color: rgb(74, 65, 200);
+    padding: 10px 30px;
+    font-weight: 100;
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-decoration: underline;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+strong{
+    color: white;
+    text-decoration: underline;
+}
