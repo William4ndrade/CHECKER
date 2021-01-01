@@ -57,6 +57,7 @@ h3.username{
     text-decoration: underline;
     -moz-user-select: none;
     -webkit-user-select: none;
+    cursor: pointer;
 }
 
 strong{

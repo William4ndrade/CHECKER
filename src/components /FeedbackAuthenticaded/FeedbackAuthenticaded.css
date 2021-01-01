@@ -1,0 +1,17 @@
+div.feedbackAuthenticaded{
+    display: flex;
+    position: fixed;
+    align-items: center;
+    justify-content: center;
+    color: rgb(69, 67, 199);
+    height: 30px;
+    font-family: googlefont;
+    letter-spacing: 3px;
+    width: 100%;
+    top: 630px;
+    font-weight: 100;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: rgb(59, 214, 59);
+
+}

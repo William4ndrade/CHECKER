@@ -1,0 +1,43 @@
+div.containerCriarlistas{
+    width: 700px;
+    min-height: 500px;
+    border-radius: 10px;
+    background-color: black;
+    color:slateblue;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+
+}
+
+
+strong.strongname{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+span.title{
+    padding: 10px;
+    font-family: googlefont;
+    font-size: 30px;
+    padding: 10px 0px 30px 0px;
+}
+
+
+div.inputs{
+
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+i.litlecard{
+    font-size: 30px;
+    position: absolute;
+    padding: 9px 0px 0px 10px;
+    color: rgb(134, 134, 223);
+
+}

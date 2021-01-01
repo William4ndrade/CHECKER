@@ -3,14 +3,15 @@ import Header from "../headerComponent/hearder"
 import { Link } from "react-router-dom"
 import "./autenticado.css"
 import Context  from "../../providers/basedataProvider"
-
+import FeedBackAuthenticaded from "../FeedbackAuthenticaded/FeedbackAuthenticaded"
+import CriarLista from "../CriarListaComponent/MainComponent"
 
 
 
 const TelaAutenticado = (props) => {
 
     const { data, setDataprovider } = useContext(Context)
-    console.log(data)
+    
    
 
 
@@ -21,8 +22,13 @@ const TelaAutenticado = (props) => {
             <div className="selectcontent" >
                 <Link className="linkselectcontent" to="/"  > <i  class="fas fa-clipboard-check"></i> Minhas Listas </Link>
                 <Link className="linkselectcontent" to="new" > Criar listas <i class="fas fa-clipboard-list"></i> </Link>
-
             </div>
+            <div className="maincontent" >
+                <CriarLista  />
+            </div>
+           
+            
+
 
         </>
 

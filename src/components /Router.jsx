@@ -24,7 +24,8 @@ const Routes =  props => {
         
         <BrowserRouter>
             <Switch>
-                 <Route path="/" exact > { Getdata() ? <TelaAutenticado /> : <TelaNãoAutenticado /> }           </Route> 
+                 <Route path="/" exact > { Getdata() ? <TelaAutenticado /> : <TelaNãoAutenticado /> }</Route> 
+                 <Redirect path="*" to="/" />
             </Switch>
         </BrowserRouter>
       
