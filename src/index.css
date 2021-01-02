@@ -1,8 +1,9 @@
 body{
   box-sizing: border-box;
   height: 100%;
-  background: linear-gradient(to right, #101018, #0f101b);
+   /* background: linear-gradient(to right, #101018, #0f101b);  */
   margin: 0px;
+  background-color: black; 
   padding: 0px;
 
 }

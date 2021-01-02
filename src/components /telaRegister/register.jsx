@@ -141,7 +141,7 @@ export default class Register extends Component {
                     <input name="Email" value={this.state.Users.Email} onChange={e => this.changeField(e)} className="mybitches" placeholder="Email" type="Email" ></input>
                     <input name="Senha" value={this.state.Users.Senha} onChange={e => this.changeField(e)} className="mybitches" placeholder="Senha" type="password" ></input>
                     <input name="confirmarsenha" value={this.state.Users.confirmarsenha} onChange={e => this.changeField(e)} className="mybitches" placeholder="Confirmar senha" type="password" ></input>
-                    <button onClick={e => this.APIPostFunction()} className="buttoncorno" > Registra-se </button>
+                    <button onClick={e => this.APIPostFunction()} className="buttoncorno" > Registrar-se </button>
                     <Link onClick={e => this.props.path("/")} className="loginclaimer" >Já é de casa? Clique aqui e faça login</Link>
                 </div>
             )

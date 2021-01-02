@@ -8,33 +8,117 @@ import "./MainComponent.css"
 export default (props) => {
 
     const { data, set } = useContext(Context)
+    const [title, setTitle] = useState({
+        value: false
+    })
     const [input, setInput] = useState({
-        title: false
+        inputData: [
+
+        ],
+        item: [
+            <div className="itemarea" >
+                <i id="meudeusvai" class="fas fa-align-left"></i>
+                <input onChange={e => ControlItemInputs(e)} placeholder="item" maxLength="250" type="text" className="inputitem" name={0} id="item" />
+            </div>,
+            <div className="itemarea" >
+                <i id="meudeusvai" class="fas fa-align-left"></i>
+                <input onChange={e => ControlItemInputs(e)} placeholder="item" maxLength="250" type="text" className="inputitem" name={1} id="item" />
+            </div>,
+            <div className="itemarea" >
+                <i id="meudeusvai" class="fas fa-align-left"></i>
+                <input onChange={e => ControlItemInputs(e)} placeholder="item" maxLength="250" type="text" className="inputitem" name={2} id="item" />
+            </div>
+
+        ]
+
+
+
+
+
     })
 
 
-    const changeField = (e) => {
-        setInput({
-            title: e.target.value,
-            nemexiste: "Oi"
-        })
+    const changeFieldTitle = (e) => {
+        const ola = { ...title }
+        ola.value = e.target.value
+        setTitle(ola)
+
+
+    }
+
+    const ControlItemInputs = (e) => {
+        const InputName = e.target.name
+        const arrayInputdata = { ...input }
+        arrayInputdata.inputData[InputName] = {
+            value: e.target.value,
+            check: false,
+            index: InputName
+        }
+
+        if (arrayInputdata.inputData.length === arrayInputdata.item.length) {
+            arrayInputdata.item.push(
+                <div className="itemarea" >
+                    <i id="meudeusvai" class="fas fa-align-left"></i>
+                    <input onChange={e => ControlItemInputs(e)} placeholder="item" maxLength="250" type="text" className="inputitem" name={arrayInputdata.item.length} id="item" />
+                </div>
+            )
+
+            
+        }
+
+         const withContent = arrayInputdata.inputData.filter(e => {
+             if(e.value.replace("^\\s+", "") === ""){
+                 return e
+             }
+         })
+
+         withContent.forEach(e => {
+            const notfalse = arrayInputdata.item.filter(e => e != false) 
+            if(notfalse.length > 3){
+                 arrayInputdata.item[e.index] = false
+            }    
+
+          })
+        
+
+
+        setInput(arrayInputdata)
+
+        const heightPage = document.body.scrollHeight;
+        window.scrollTo(0 , heightPage);
+
+    }
+
+
+    const ValidationForm = () => {
+        const Data = input.inputData.filter(e => e.value.trim()).map(e => e.value.replace(/( )+/g, ' '))
+        
+        console.log(Data)
+
+
 
 
     }
 
 
 
-
-
     return (
 
         <div className="containerCriarlistas" >
-            {input.title ? <span className="title" >{input.title}</span> : <span className="title" > Lista do <strong className="strongname">{data.username}</strong>  <i className="fa fa-sticky-note litlecard "></i>  </span>}
+            {title.value ? <span className="title" >{title.value}</span> : <span className="title" > Lista <strong className="strongname">{data.username}</strong>  <i className="fa fa-sticky-note litlecard "></i>  </span>}
             <div className="inputs">
                 <div className="changetitle" >
-                    <input onChange={e => changeField(e)} value={input.title ? input.title : ""} placeholder="Título" maxLength="30" className="mybitches" type="text" name="title" id="title" />
+                    <input onChange={e => changeFieldTitle(e)} placeholder="Título" maxLength="30" className="mybitches" type="text" name="title" id="title" />
                 </div>
-                <h3 className="listtitle" >Escreva sua Lista:</h3>
+                <h3 className="listtitle" > <i style={{ fontSize: "24px", color: "white" }} class="fas fa-list-ol"></i> Escreva sua Lista:</h3>
+                <div className="inputsitens">
+                    {input.item}
+                </div>
+                <button onClick={ValidationForm} className="buttoncorno" >Salvar</button>
+
+
+
+
 
 
 

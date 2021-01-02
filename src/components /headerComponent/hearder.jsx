@@ -2,30 +2,24 @@ import React, { Component } from "react"
 import "./header.css"
 import {Link} from "react-router-dom"
 import Context from "../../providers/basedataProvider"
+import BaseURL from "../../Config.json"
 
 export default class Header extends Component {
 
-    constructor(props){
-      super(props)
-      
-  
-    }
+    
 
     
-    Loggout(){
+    async Loggout(){
 
       const {data, set} = this.context
-      function deleteAllCookies() {
-        var cookies = document.cookie.split(";");
-    
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = cookies[i];
-            var eqPos = cookie.indexOf("=");
-            var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
-            document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
-        }
-    }
-       deleteAllCookies()
+      fetch(`${BaseURL.baseurl}/loggout`, {
+          method: "get",
+          credentials: "include"
+      }).then(e => e.json())
+        .then(e => console.log(e))
+
+
+
        set({
          authenticaded: false
        })

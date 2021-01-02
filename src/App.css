@@ -18,9 +18,10 @@ div.container{
 div.formAREA{
     height: 600px;
     width: 600px;
-    background-color: black;
+    
     margin: 20px 40px;
     border-radius: 10px;
+    border: 1px solid rgb(14, 14, 14);
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -30,9 +31,9 @@ div.formAREA{
 div.formAREAL{
   height: 450px;
   width: 650px;
-  background-color: black;
+  border: 1px solid rgb(14, 14, 14);
   margin: 20px 40px;
-  border-radius: 10px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   flex-direction: column;
