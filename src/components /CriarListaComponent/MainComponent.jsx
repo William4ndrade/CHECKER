@@ -167,7 +167,7 @@ export default (props) => {
                 }).then(e => 1)
 
             }else{
-                setFeedbackfunction(0, "Coleque um titulo na sua lista")
+            setFeedbackfunction(0, "Coleque um titulo na sua lista")
             }
             
         }else{
