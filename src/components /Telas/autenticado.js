@@ -1,10 +1,10 @@
-import react, { useContext } from "react"
+import React, { useContext } from "react"
 import Header from "../headerComponent/hearder"
 import { Link } from "react-router-dom"
 import "./autenticado.css"
 import Context  from "../../providers/basedataProvider"
-import FeedBackAuthenticaded from "../FeedbackAuthenticaded/FeedbackAuthenticaded"
 import CriarLista from "../CriarListaComponent/MainComponent"
+import Feedback from "../FeedbackAuthenticaded/FeedbackAuthenticaded"
 
 
 
@@ -25,6 +25,7 @@ const TelaAutenticado = (props) => {
             </div>
             <div className="maincontent" >
                 <CriarLista  />
+               
             </div>
            
             

@@ -1,13 +1,18 @@
-import { event } from "jquery"
 import React, { useContext, useState } from "react"
 import Context from "../../providers/basedataProvider"
 import "./MainComponent.css"
-
+import Feedback from "../FeedbackAuthenticaded/FeedbackAuthenticaded"
+import BaseUrl from "../../Config.json"
 
 
 export default (props) => {
 
     const { data, set } = useContext(Context)
+    const [feedback, setFeedback] = useState({
+        active: false, 
+        color: null, 
+        mensage: null
+    })
     const [title, setTitle] = useState({
         value: false
     })
@@ -89,11 +94,87 @@ export default (props) => {
 
     }
 
+    const setFeedbackfunction = (color, value) => {
+        const [good, bad] = ["rgb(68, 158, 68)", "rgb(179, 11, 11)"]
+        setFeedback({
+            active: true,
+            color: color === 1 ? good : bad,
+            mensage: value
+        })
+
+        setTimeout(() => {
+            setFeedback({
+                active: false,
+                color: null,
+                mensage: null
+            })
+
+        }, 2000)
+
+        
+        
+
+    }
 
     const ValidationForm = () => {
         const Data = input.inputData.filter(e => e.value.trim()).map(e => e.value.replace(/( )+/g, ' '))
-        
-        console.log(Data)
+        if(Data.length > 0){
+            let FinalDATA = ""
+            Data.forEach((e,i) => {
+                if(e.length > 250){
+                    setFeedbackfunction(0, `O ${i} possivel mais caracteres que o permitido. ${e.length}/250`)
+                    return false
+                }else{
+                   const finalData =  Data.map(e => {
+                        return {
+                            value: e,
+                            checked: false
+                        }
+                    })
+                    
+                    FinalDATA = finalData
+
+                }
+            })
+
+            return FinalDATA
+            
+        }else{
+            setFeedbackfunction(0, "Preencha os itens")
+            return false
+
+        }
+
+    }
+
+    const ApiComunication = () => {
+        const ItensContent = ValidationForm()
+        console.log(ItensContent)
+        if(ItensContent != false){
+            if(title.value){
+                fetch(`${BaseUrl.baseurl}/newList`, {
+                    credentials: "include",
+                    method: "post", 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        List: {
+                            title: title.value, 
+                            itens: ItensContent
+                        }
+                    })
+                }).then(e => 1)
+
+            }else{
+                setFeedbackfunction(0, "Coleque um titulo na sua lista")
+            }
+            
+        }else{
+            setFeedbackfunction(0, "Escreva algo nos itens")
+        }
+
+
 
 
 
@@ -101,10 +182,10 @@ export default (props) => {
     }
 
 
-
     return (
 
         <div className="containerCriarlistas" >
+            {feedback.active ?  <Feedback color={feedback.color} value={feedback.mensage} /> : ""}
             {title.value ? <span className="title" >{title.value}</span> : <span className="title" > Lista <strong className="strongname">{data.username}</strong>  <i className="fa fa-sticky-note litlecard "></i>  </span>}
             <div className="inputs">
                 <div className="changetitle" >
@@ -114,9 +195,8 @@ export default (props) => {
                 <div className="inputsitens">
                     {input.item}
                 </div>
-                <button onClick={ValidationForm} className="buttoncorno" >Salvar</button>
-
-
+                <button onClick={ApiComunication} className="buttoncorno" >Salvar</button>
+            
 
 
 
