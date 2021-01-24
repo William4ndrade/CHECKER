@@ -5,10 +5,11 @@ import DataProvider from "./providers/basedataProvider"
 import Auth from "./components /Auth/IsAuthenticaded"
 
 
+
 const Myapp = () => {
 
   const [Dataproviders, setDataprovider] = useState({
-    authenticaded: false,
+    authenticaded: true, // paraa teste no celular
     username: null,
 
   })
@@ -37,7 +38,7 @@ const Myapp = () => {
 
   return (
     <DataProvider.Provider value={{data: Dataproviders, set: setDataprovider}}>
-      < Routes />
+          < Routes />
     </DataProvider.Provider>
   )
 

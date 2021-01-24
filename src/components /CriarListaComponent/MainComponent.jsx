@@ -5,7 +5,7 @@ import Feedback from "../FeedbackAuthenticaded/FeedbackAuthenticaded"
 import BaseUrl from "../../Config.json"
 
 
-export default (props) => {
+const Criarlistas = props => {
 
     const { data, set } = useContext(Context)
     const [buttonActive, setButtonActive] = useState(true)
@@ -17,21 +17,24 @@ export default (props) => {
     const [title, setTitle] = useState({
         value: false
     })
+
+
+    
     const [input, setInput] = useState({
         inputData: [
 
         ],
         item: [
-            <div className="itemarea" >
-                <i id="meudeusvai" class="fas fa-align-left"></i>
+            <div key="0" className="itemarea" >
+                <i id="meudeusvai" className="fas fa-align-left"></i>
                 <input onChange={e => ControlItemInputs(e)} placeholder="item" maxLength="250" type="text" className="inputitem" name={0} id="item" />
             </div>,
-            <div className="itemarea" >
-                <i id="meudeusvai" class="fas fa-align-left"></i>
+            <div key="1" className="itemarea" >
+                <i id="meudeusvai" className="fas fa-align-left"></i>
                 <input onChange={e => ControlItemInputs(e)} placeholder="item" maxLength="250" type="text" className="inputitem" name={1} id="item" />
             </div>,
-            <div className="itemarea" >
-                <i id="meudeusvai" class="fas fa-align-left"></i>
+            <div key="2" className="itemarea" >
+                <i id="meudeusvai" className="fas fa-align-left"></i>
                 <input onChange={e => ControlItemInputs(e)} placeholder="item" maxLength="250" type="text" className="inputitem" name={2} id="item" />
             </div>
 
@@ -63,8 +66,8 @@ export default (props) => {
 
         if (arrayInputdata.inputData.length === arrayInputdata.item.length) {
             arrayInputdata.item.push(
-                <div className="itemarea" >
-                    <i id="meudeusvai" class="fas fa-align-left"></i>
+                <div key={arrayInputdata.item.length}  className="itemarea" >
+                    <i id="meudeusvai" className="fas fa-align-left"></i>
                     <input onChange={e => ControlItemInputs(e)} placeholder="item" maxLength="250" type="text" className="inputitem" name={arrayInputdata.item.length} id="item" />
                 </div>
             )
@@ -73,13 +76,11 @@ export default (props) => {
         }
 
         const withContent = arrayInputdata.inputData.filter(e => {
-            if (e.value.replace("^\\s+", "") === "") {
-                return e
-            }
+            return e.value.replace("^\\s+", "") === "" 
         })
 
         withContent.forEach(e => {
-            const notfalse = arrayInputdata.item.filter(e => e != false)
+            const notfalse = arrayInputdata.item.filter(e => e !== false)
             if (notfalse.length > 3) {
                 arrayInputdata.item[e.index] = false
             }
@@ -148,10 +149,15 @@ export default (props) => {
 
     }
 
+    
+
     const ApiComunication = () => {
+        window.scrollTo({
+            top: 0
+        })
         const ItensContent = ValidationForm()
         console.log(ItensContent)
-        if (ItensContent != false) {
+        if (ItensContent !== false) {
             if (title.value) {
                 setButtonActive(false)
                 fetch(`${BaseUrl.baseurl}/newList`, {
@@ -166,19 +172,29 @@ export default (props) => {
                             itens: ItensContent
                         }
                     })
-                }).then(e => {
+                }).then(async e => {
                     if(e.status === 201){
-                        setTitle(false)
-                        
                         setFeedbackfunction(1, "Lista adicionada com sucesso")
                         setButtonActive(true)
+                        setTimeout(() => window.location.reload(), 1000)
 
                     }else{
                         if(e.status === 429){
                             setFeedbackfunction(0, "Você excedeu o limite de requests")
                             setButtonActive(true)
 
-                        }else{
+                        }else if(e.status === 401){
+                            setFeedbackfunction(0, "Você não está logado, será redirecionado a tela de login.")
+                           setTimeout(() => {
+                                set({
+                               authenticaded: false
+                           })
+                            }, 2200);
+
+                           
+                        }
+                        
+                        else{
                             setFeedbackfunction(0, "Algo deu errado tente novamente")
                             setButtonActive(true)
                         }
@@ -209,14 +225,14 @@ export default (props) => {
             {title.value ? <span className="title" >{title.value}</span> : <span className="title" > Lista <strong className="strongname">{data.username}</strong>  <i className="fa fa-sticky-note litlecard "></i>  </span>}
             <div className="inputs">
                 <div className="changetitle" >
-                    <input onChange={e => changeFieldTitle(e)} placeholder="Título" maxLength="30" className="mybitches" type="text" name="title" id="title" />
+                    <input value={title.value ? title.value : ""} onChange={e => changeFieldTitle(e)} placeholder="Título" maxLength="30" className="mybitches" type="text" name="title" id="title" />
                 </div>
-                <h3 className="listtitle" > <i style={{ fontSize: "24px", color: "white" }} class="fas fa-list-ol"></i> Escreva sua Lista:</h3>
+                <h3 className="listtitle" > <i style={{ fontSize: "24px", color: "white" }} className="fas fa-list-ol"></i> Escreva sua Lista:</h3>
                 <div className="inputsitens">
                     {input.item}
                 </div>
                 {
-                    buttonActive ? <button onClick={ApiComunication} className="buttoncorno" >Salvar</button>  :  <svg xmlns="http://www.w3.org/2000/svg" xmlns xlink="http://www.w3.org/1999/xlink" style={{margin: "auto", background: "rgba(0, 0, 0, 0) none repeat scroll 0% 0%", display: "block", shapeRendering: "auto" }} width="90px" height="90px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    buttonActive ? <button onClick={ApiComunication} className="buttoncorno" >Salvar</button>  :  <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style={{margin: "auto", background: "rgba(0, 0, 0, 0) none repeat scroll 0% 0%", display: "block", shapeRendering: "auto" }} width="90px" height="90px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                     <rect x="19.5" y="27.5" width="11" height="45" fill="#273974">
                         <animate attributeName="y" repeatCount="indefinite" dur="0.7633587786259541s" calcMode="spline" keyTimes="0;0.5;1" values="18.500000000000004;27.5;27.5" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.15267175572519084s"></animate>
                         <animate attributeName="height" repeatCount="indefinite" dur="0.7633587786259541s" calcMode="spline" keyTimes="0;0.5;1" values="62.99999999999999;45;45" keySplines="0 0.5 0.5 1;0 0.5 0.5 1" begin="-0.15267175572519084s"></animate>
@@ -258,3 +274,5 @@ export default (props) => {
 
 
 }
+
+export default Criarlistas

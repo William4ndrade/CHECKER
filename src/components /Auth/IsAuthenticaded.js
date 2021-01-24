@@ -1,5 +1,5 @@
 import config from "../../Config.json"
-import {react} from "react"
+
 
 
 const IsAuthenticaded = async () => {

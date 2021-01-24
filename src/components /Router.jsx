@@ -5,8 +5,8 @@ import  Context from "../providers/basedataProvider"
 // components 
 
 import TelaNãoAutenticado from "./Telas/naoautenticado"
-import TelaAutenticado from "./Telas/autenticado"
-
+import TelaAutenticado from "./Telas/autenticado.jsx"
+import AddList from "../components /Telas/autenticadoNewlist"
 
 //--------------------------------------------
 
@@ -24,8 +24,10 @@ const Routes =  props => {
         
         <BrowserRouter>
             <Switch>
-                 <Route path="/" exact > { Getdata() ? <TelaAutenticado /> : <TelaNãoAutenticado /> }</Route> 
-                 <Redirect path="*" to="/" />
+                 <Route path="/" exact > { Getdata() ? <TelaAutenticado /> : <TelaNãoAutenticado /> }</Route>
+                 { Getdata() ? <Route path="/newList" exact >  <AddList/>   </Route>  : <Redirect to="/" />}
+               
+                  
             </Switch>
         </BrowserRouter>
       
