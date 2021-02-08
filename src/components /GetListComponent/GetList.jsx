@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react"
 import Context from "../../providers/basedataProvider"
 import "./GetList.css"
-import Feedback from "../FeedbackAuthenticaded/FeedbackAuthenticaded"
 import BaseUrl from "../../Config.json"
 import { Link } from "react-router-dom"
 
@@ -9,7 +8,8 @@ import { Link } from "react-router-dom"
 
 
 
-const GetList = () => {
+
+const GetList = (props) => {
 
     const contextoAPP = useContext(Context)
     const [Lists, setLists] = useState([
@@ -28,40 +28,9 @@ const GetList = () => {
     }
 
 
-    const PushList = async (skip, pushNum = 20) => {
-        let Data = []
-        await fetch(`${BaseUrl.baseurl}/Pushmylists`, {
-            headers: {
-                skip: skip,
-                pushNum: pushNum,
-                'Content-Type': 'application/json'
-            },
-            method: "get",
-            credentials: "include"
-
-        }).then(async e => {
-            const MyJsonData = await e.json()
-            if (e.status === 401) {
-                contextoAPP.set({
-                    authenticaded: false
-                })
-            } else {
-                if (MyJsonData.ok) {
-                    Data = MyJsonData.data
-
-                }
-
-            }
-
-        })
-
-        return Data
-
-    }
-
-    async function check(target, idList){
+    async function check(target, idList) {
         const itemIndex = target.target.id
-        if(target.target.className === "iconcheck fas fa-check-circle"){
+        if (target.target.className === "iconcheck fas fa-check-circle") {
             target.target.className = "iconcheck far fa-circle"
             await fetch(BaseUrl.baseurl + "/check", {
                 method: "PUT",
@@ -74,16 +43,16 @@ const GetList = () => {
                     index: itemIndex,
                     boolean: false
                 })
-                
+
             }).then(async e => {
-                if(e.status === 401){
+                if (e.status === 401) {
                     contextoAPP.set({
                         authenticaded: false
                     })
                 }
             })
-            
-        }else if(target.target.className === "iconcheck far fa-circle"){
+
+        } else if (target.target.className === "iconcheck far fa-circle") {
             target.target.className = "iconcheck fas fa-check-circle"
             await fetch(BaseUrl.baseurl + "/check", {
                 method: "PUT",
@@ -91,46 +60,45 @@ const GetList = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify( {
+                body: JSON.stringify({
                     id: idList,
                     index: itemIndex,
                     boolean: true
                 })
-                
+
             }).then(async e => {
-                if(e.status === 401){
+                if (e.status === 401) {
                     contextoAPP.set({
                         authenticaded: false
                     })
                 }
             })
-        
+
         }
 
     }
 
-
-    async function CreateListArea() {
-        const Listsfromserver = await PushList(0, 20)
+    async function CreateListArea(data) { 
+        const Listsfromserver = data || []
         if (Listsfromserver.length === 0) {
             return
         }
         const Listaatual = []
 
         Listsfromserver.forEach((e, i) => {
-         
+
             const ListTitle = e.Lists.title
             const ListItens = e.Lists.itens
-            
-            
-            
+
+
+
 
             const CreateLi = (idList) => {
                 const Li = []
                 ListItens.forEach((e, i) => {
                     if (i < 3) {
 
-                        const icon = e.checked ? <i id={i} onClick={e => check(e, idList)} className="iconcheck fas fa-check-circle"></i> : <i id={i} onClick={e => check(e,idList)} className="iconcheck far fa-circle"></i>
+                        const icon = e.checked ? <i id={i} onClick={e => check(e, idList)} className="iconcheck fas fa-check-circle"></i> : <i id={i} onClick={e => check(e, idList)} className="iconcheck far fa-circle"></i>
 
                         Li.push(
                             <div key={i} className="itendiv" style={{ display: "flex" }}>
@@ -156,8 +124,8 @@ const GetList = () => {
                     </ul>
                     <div>
                         {ChooseSVG()}
-                       <Link to={e.Lists._id} ><button className="buttonmais" >Ver mais</button></Link>
-                        
+                        <Link to={e.Lists._id} ><button className="buttonmais" >Ver mais</button></Link>
+
                     </div>
                 </div>
 
@@ -171,33 +139,75 @@ const GetList = () => {
             Listaatual.push(List)
 
 
-
-
-
-
-
-
-
         })
 
         setLists(Listaatual)
     }
 
-    useEffect(() => {
-        const func = async () => await CreateListArea()
-        func()
+
+
+
+
+
+    const PushList = async (skip, pushNum = 20) => {
+        let Lists = []
+        await fetch(`${BaseUrl.baseurl}/Pushmylists`, {
+            headers: {
+                skip: skip,
+                pushNum: pushNum,
+                'Content-Type': 'application/json'
+            },
+            method: "get",
+            credentials: "include"
+
+        }).then(async e => {
+            const MyJsonData = await e.json()
+            if (e.status === 401) {
+                contextoAPP.set({
+                    authenticaded: false
+                })
+            } else {
+                if (e.status === 200) {
+                    const datafromserver = MyJsonData.data
+                    Lists = datafromserver
+
+                }
+            }
+
+        })
+
+        return Lists
+
+
+    }
+
+
+    useEffect(async () => {
+        const data = await PushList(0,20)
+        await CreateListArea(data)
+        
     }, [])
+
+    useEffect(async () => {
+        const data = contextoAPP.data.AllLists || []
+        await CreateListArea(data)
+        if(data.length === 0){
+            const data = await PushList(0,20)
+            await CreateListArea(data)
+        }
+
+    }, [contextoAPP.data])
+
+    
+
+
 
 
     return (
         <>
 
-
-
             <div className="mainLists" >
-                {Lists.length > 0 ? Lists : <h2 className="nolist" > Não há listas </h2>}
-
-
+                {Lists.length > 0 ? Lists : <h2 className="nolist" > Não foi encontrado Listas </h2>}
 
             </div>
 

@@ -3,7 +3,6 @@ html{
 }
 
 div.mainLists{
-
     width: 100%;
     color: rgb(255, 255, 255);
     display: flex;
@@ -54,7 +53,7 @@ svg.svglist{
 
 
 button.buttonmais{
-    font-family: googleFont  ;
+    font-family: googleFont ;
     color: rgb(44, 49, 122);
     cursor: pointer;
     font-weight: 900;
@@ -67,8 +66,7 @@ button.buttonmais{
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     width: 100%;
-    -webkit-user-select: none;
-    -moz-user-select: none;
+    user-select: none;
 }
 
 button.buttonmais:hover{
@@ -131,6 +129,3 @@ div.itendiv{
 
 }
 
-div.itendiv:hover{
-    color: rgb(126, 126, 126);
-}

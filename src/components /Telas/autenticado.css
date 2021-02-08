@@ -30,7 +30,7 @@ i{
 }
 
 div.maincontent{
-  
+    flex-wrap: wrap;
     max-width: 100%;
     height: 100%;
     display: flex;
@@ -70,3 +70,4 @@ i.iconinput{
    
     
 }
+

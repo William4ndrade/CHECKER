@@ -9,9 +9,9 @@ import Auth from "./components /Auth/IsAuthenticaded"
 const Myapp = () => {
 
   const [Dataproviders, setDataprovider] = useState({
-    authenticaded: true, // paraa teste no celular
+    authenticaded: false, // paraa teste no celular
     username: null,
-
+    AllLists:  []
   })
 
 
