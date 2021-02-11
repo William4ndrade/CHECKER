@@ -11,7 +11,8 @@ const Myapp = () => {
   const [Dataproviders, setDataprovider] = useState({
     authenticaded: false, // paraa teste no celular
     username: null,
-    AllLists:  []
+    AllLists:  [],
+    hasinputsearchvalue: false
   })
 
 

@@ -189,12 +189,16 @@ const GetList = (props) => {
     }, [])
 
     useEffect(async () => {
-        const data = contextoAPP.data.AllLists || []
-        await CreateListArea(data)
-        if(data.length === 0){
+        const data = contextoAPP.data.AllLists || [] 
+        if(data.length > 0){
+            await CreateListArea(data)
+        }else if(data.length === 0 && contextoAPP.data.hasinputsearchvalue === false){
             const data = await PushList(0,20)
             await CreateListArea(data)
+        }else if(data.length === 0 && contextoAPP.data.hasinputsearchvalue === true){
+            setLists([])
         }
+       
 
     }, [contextoAPP.data])
 
@@ -207,7 +211,7 @@ const GetList = (props) => {
         <>
 
             <div className="mainLists" >
-                {Lists.length > 0 ? Lists : <h2 className="nolist" > Não foi encontrado Listas </h2>}
+                {Lists.length > 0 ? Lists : <h2 className="nolist" > Conteúdo não encontrado </h2>}
 
             </div>
 

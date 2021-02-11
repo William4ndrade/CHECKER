@@ -25,7 +25,7 @@ const TelaAutenticado = (props) => {
             }).then(async e => {
                 const searchdata = await e.json()
                 const teste = {...context.data}
-              
+                teste.hasinputsearchvalue  = true
                 if (e.status !== 204) {
                     teste.AllLists = searchdata.data 
                     context.set(teste)
@@ -38,6 +38,7 @@ const TelaAutenticado = (props) => {
             })
         }else{
             const teste = {...context.data}
+            teste.hasinputsearchvalue  = false
             teste.AllLists = []
             context.set(teste)
         }
