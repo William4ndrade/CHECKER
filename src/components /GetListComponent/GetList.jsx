@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 
 
 
+
 const GetList = (props) => {
 
     const contextoAPP = useContext(Context)
@@ -78,7 +79,7 @@ const GetList = (props) => {
 
     }
 
-    async function CreateListArea(data) { 
+    async function CreateListArea(data) {
         const Listsfromserver = data || []
         if (Listsfromserver.length === 0) {
             return
@@ -124,7 +125,11 @@ const GetList = (props) => {
                     </ul>
                     <div>
                         {ChooseSVG()}
-                        <Link to={e.Lists._id} ><button className="buttonmais" >Ver mais</button></Link>
+                        <Link onClick={ele => {
+                            const contextcopy = { ...contextoAPP.data }
+                            contextcopy.idsinglelist = e.Lists._id
+                            contextoAPP.set(contextcopy)
+                        }} to={e.Lists._id} ><button className="buttonmais" >Ver mais</button></Link>
 
                     </div>
                 </div>
@@ -182,27 +187,39 @@ const GetList = (props) => {
     }
 
 
-    useEffect(async () => {
-        const data = await PushList(0,20)
-        await CreateListArea(data)
-        
+    useEffect(() => {
+                // se colocar async no hook fica dando warning nessa porra por  isso a gambiarra da function a
+        const a = async () => {
+            const data = await PushList(0, 20)
+            await CreateListArea(data)
+        }
+
+        a()
+
+
     }, [])
 
-    useEffect(async () => {
-        const data = contextoAPP.data.AllLists || [] 
-        if(data.length > 0){
-            await CreateListArea(data)
-        }else if(data.length === 0 && contextoAPP.data.hasinputsearchvalue === false){
-            const data = await PushList(0,20)
-            await CreateListArea(data)
-        }else if(data.length === 0 && contextoAPP.data.hasinputsearchvalue === true){
-            setLists([])
+    useEffect(() => {
+        // se colocar async no hook fica dando warning nessa porra por  isso a gambiarra da function a
+        const a = async () => {
+            const data = contextoAPP.data.AllLists || []
+            if (data.length > 0) {
+                await CreateListArea(data)
+            } else if (data.length === 0 && contextoAPP.data.hasinputsearchvalue === false) {
+                const data = await PushList(0, 20)
+                await CreateListArea(data)
+            } else if (data.length === 0 && contextoAPP.data.hasinputsearchvalue === true) {
+                setLists([])
+            }
         }
-       
+
+        a()
+
+
 
     }, [contextoAPP.data])
 
-    
+
 
 
 

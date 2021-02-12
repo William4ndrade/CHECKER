@@ -222,7 +222,7 @@ const Criarlistas = props => {
 
         <div className="containerCriarlistas" >
             {feedback.active ? <Feedback color={feedback.color} value={feedback.mensage} /> : ""}
-            {title.value ? <span className="title" >{title.value}</span> : <span className="title" > Lista <strong className="strongname">{data.username}</strong>  <i className="fa fa-sticky-note litlecard "></i>  </span>}
+            {title.value ? <span className="title" >{title.value}</span> : <span className="title" > Lista <strong className="strongname">{data.username}</strong>    </span>}
             <div className="inputs">
                 <div className="changetitle" >
                     <input value={title.value ? title.value : ""} onChange={e => changeFieldTitle(e)} placeholder="Título" maxLength="30" className="mybitches" type="text" name="title" id="title" />

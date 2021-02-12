@@ -5,6 +5,7 @@ import "./autenticado.css"
 import Context from "../../providers/basedataProvider"
 import GetList from "../GetListComponent/GetList"
 import BaseUrl from "../../Config.json"
+import OneSingleList from "../OneListComponent/OneListComponent"
 
 
 const TelaAutenticado = (props) => {
@@ -53,7 +54,7 @@ const TelaAutenticado = (props) => {
     return (
         <>
             < Header nome={data.username} />
-            <div className="selectcontent" >
+              <div className="selectcontent" >
                 <Link style={window.location.pathname === "/" ? { borderBottom: "1px solid rgb(89, 29, 253)" } : { borderBottom: "none" }} className="linkselectcontent" to="/"  > <i className="fas fa-clipboard-check"></i> Minhas Listas </Link>
                 <Link style={window.location.pathname === "/newList" ? { borderBottom: "1px solid rgb(89, 29, 253)" } : { borderBottom: "none" }} className="linkselectcontent" to="newList" > Criar listas <i className="fas fa-clipboard-list"></i> </Link>
             </div>
@@ -69,8 +70,8 @@ const TelaAutenticado = (props) => {
              
 
 
-            </div>
-
+            </div>  *
+             {/* < OneSingleList/>  */}
 
 
 

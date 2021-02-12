@@ -3,10 +3,11 @@ html{
 }
 
 div.mainLists{
-    width: 100%;
+    max-width: 100%;
     color: rgb(255, 255, 255);
     display: flex;
     flex-wrap: wrap;
+    
 }
 
 div.bilhete{
@@ -20,8 +21,19 @@ div.bilhete{
     min-height: 400px ;
     border-radius: 20px;
 
+}
 
 
+@media(max-width: 500px){
+    div.bilhete{
+        margin: 20px  5px;
+        align-self: center;
+    }
+
+    div.mainLists{
+        align-items: center;
+        justify-content: center;
+    }
 
 }
 

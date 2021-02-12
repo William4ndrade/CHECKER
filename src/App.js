@@ -12,7 +12,8 @@ const Myapp = () => {
     authenticaded: false, // paraa teste no celular
     username: null,
     AllLists:  [],
-    hasinputsearchvalue: false
+    hasinputsearchvalue: false,
+    idsinglelist: false
   })
 
 

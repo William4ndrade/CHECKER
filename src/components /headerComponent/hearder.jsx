@@ -16,7 +16,6 @@ export default class Header extends Component {
           method: "get",
           credentials: "include"
       }).then(e => e.json())
-        .then(e => console.log(e))
 
 
 
